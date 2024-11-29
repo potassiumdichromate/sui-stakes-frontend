@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    --background: #181b2a;
+    --foreground: #ffffff;
+    --muted: #677fc4;
+    --border: #2b4286;
+
+    --navbar-bg: #1a1f40;
+    --sidebar-bg: linear-gradient(88deg, #1a1f3f 1.5%, #1c2455 98.02%);
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+}
