@@ -3,13 +3,14 @@ import { Navbar, Sidebar } from "@/components";
 import Router from "@/Router/Router";
 import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
+import BottomNav from "./components/BottomNav";
 
 export default function App() {
   const [isSidebarShrinked, setIsSidebarShrinked] = useState(false);
 
   return (
     <BrowserRouter>
-      <div className="relative w-full min-h-screen bg-background text-foreground flex items-start antialiased">
+      <div className="relative w-full min-h-screen bg-background text-foreground flex items-start antialiased max-lg:pb-16">
         <aside
           className={`max-lg:hidden sticky top-0 z-40 ${
             !isSidebarShrinked ? "w-[18%]" : "w-[5%]"
@@ -31,6 +32,7 @@ export default function App() {
           <main className="w-full flex-grow">
             <Router />
           </main>
+          <BottomNav />
         </div>
       </div>
     </BrowserRouter>
