@@ -1,6 +1,5 @@
 import Logo from "@/assets/imgs/others/Logo.png";
 import LogoSm from "@/assets/imgs/others/Logo-sm.png";
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import DiceImg from "@/assets/imgs/banners/dice.png"
 
@@ -11,7 +10,6 @@ import { BsFillQuestionCircleFill } from "react-icons/bs";
 import { FaHeadphones } from "react-icons/fa";
 
 export default function Sidebar({ isSidebarShrinked }) {
-  const [selectedPage, setSelectedPage] = useState("Home");
   const { pathname } = useLocation();
   const links = [
     {

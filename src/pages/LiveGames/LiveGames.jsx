@@ -1,3 +1,4 @@
+import { games } from "@/constants";
 import React from "react";
 
 export default function LiveGames() {
