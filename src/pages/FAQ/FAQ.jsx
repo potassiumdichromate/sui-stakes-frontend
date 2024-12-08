@@ -69,24 +69,45 @@ export default function FAQ() {
           <div className="w-full h-[1px] border border-border" />
         </div>
 
-        <Accordion type="single" collapsible>
-          <div className="grid lg:grid-cols-2 gap-4">
-            {faqs.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger
-                  className={`uppercase hover:no-underline bg-[linear-gradient(180deg,#144E8E_-16.35%,#1D8FE5_139.42%)] rounded-lg px-4`}
-                >
-                  {item.qus}
-                </AccordionTrigger>
-                <AccordionContent
-                  className={`no-underline bg-[rgba(22,126,205,0.18)] border border-[rgba(22,126,205,0.25)] p-4 leading-normal rounded-b-lg`}
-                >
-                  {item.ans}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </div>
-        </Accordion>
+        <div className="grid lg:grid-cols-2 gap-4">
+          <Accordion type="single" collapsible>
+            <div className="grid gap-4">
+              {faqs.slice(0, 3).map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger
+                    className={`uppercase hover:no-underline bg-[linear-gradient(180deg,#144E8E_-16.35%,#1D8FE5_139.42%)] rounded-lg px-4`}
+                  >
+                    {item.qus}
+                  </AccordionTrigger>
+                  <AccordionContent
+                    className={`no-underline bg-[rgba(22,126,205,0.18)] border border-[rgba(22,126,205,0.25)] p-4 leading-normal rounded-b-lg`}
+                  >
+                    {item.ans}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </div>
+          </Accordion>
+
+          <Accordion type="single" collapsible>
+            <div className="grid gap-4">
+              {faqs.slice(3, 5).map((item, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger
+                    className={`uppercase hover:no-underline bg-[linear-gradient(180deg,#144E8E_-16.35%,#1D8FE5_139.42%)] rounded-lg px-4`}
+                  >
+                    {item.qus}
+                  </AccordionTrigger>
+                  <AccordionContent
+                    className={`no-underline bg-[rgba(22,126,205,0.18)] border border-[rgba(22,126,205,0.25)] p-4 leading-normal rounded-b-lg`}
+                  >
+                    {item.ans}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </div>
+          </Accordion>
+        </div>
       </div>
     </div>
   );

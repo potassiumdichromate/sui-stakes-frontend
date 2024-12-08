@@ -19,7 +19,9 @@ export default function App() {
           <Sidebar isSidebarShrinked={isSidebarShrinked}/>
         </aside>
         <div
-          className={`max-lg:w-full flex-grow min-h-screen flex flex-col`}
+          className={`${
+            !isSidebarShrinked ? "lg:w-[80%]" : "lg:w-[95%]"
+          } min-h-screen flex flex-col`}
         >
           <header className="sticky top-0 w-full px-6 py-4 bg-navbar-bg z-40">
             <Navbar
