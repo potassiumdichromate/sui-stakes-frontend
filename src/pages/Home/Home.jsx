@@ -1,18 +1,40 @@
 import { games } from "@/constants";
-import BannerImg from "@/assets/imgs/banners/BannerImg2.png";
+import Banner1 from "@/assets/imgs/banners/Banner1.png";
+import Banner2 from "@/assets/imgs/banners/Banner2.png";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
 export default function Home() {
   return (
     <section className="p-6 space-y-6">
-      <div className="flex">
-        <div className="relative rounded-2xl overflow-hidden">
-          <img src={BannerImg} alt="img" className="w-auto h-[260px]" />
-          <div className="absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-b from-transparent from-[25%] to-black/50">
-            <p className="text-white/90 font-medium">GAME OF THE WEEK</p>
-            <p className="text-2xl font-bold">BEAST PROTECTOR</p>
-          </div>
-        </div>
+      <div className="flex items-end gap-8">
+        <img src={Banner1} alt="img" className="w-auto lg:h-[264px]" />
+        <img src={Banner2} alt="img" className="max-lg:hidden w-auto h-[272px]" />
+        <img src={Banner2} alt="img" className="max-lg:hidden w-auto h-[272px]" />
       </div>
+
+      {/* <Carousel opts={{  }}>
+        <CarouselContent className="-ml-2">
+          <CarouselItem className="flex-[0_0_auto] pl-2">
+            <div>
+              <img src={Banner1} alt="img" className="w-auto h-[264px]" />
+            </div>
+          </CarouselItem>
+          <CarouselItem className="flex-[0_0_auto] pl-1">
+            <div>
+              <img src={Banner1} alt="img" className="w-auto h-[264px]" />
+            </div>
+          </CarouselItem>
+          <CarouselItem className="flex-[0_0_auto] pl-1">
+            <div>
+              <img src={Banner1} alt="img" className="w-auto h-[264px]" />
+            </div>
+          </CarouselItem>
+        </CarouselContent>
+      </Carousel> */}
 
       <div className="flex flex-col items-start lg:flex-row lg:items-stretch">
         <div className="bg-[#1C2353] p-2 flex items-center justify-center max-lg:rounded-t-xl lg:rounded-l-xl">

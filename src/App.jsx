@@ -13,15 +13,13 @@ export default function App() {
       <div className="relative w-full min-h-screen bg-background text-foreground flex items-start antialiased max-lg:pb-16">
         <aside
           className={`max-lg:hidden sticky top-0 z-40 ${
-            !isSidebarShrinked ? "w-[18%]" : "w-[5%]"
+            !isSidebarShrinked ? "w-[20%]" : "w-[5%]"
           } h-screen p-4 bg-sidebar-bg transition-all ease-in-out `}
         >
           <Sidebar isSidebarShrinked={isSidebarShrinked}/>
         </aside>
         <div
-          className={`max-lg:w-full ${
-            !isSidebarShrinked ? "w-[82%]" : "w-[95%]"
-          } min-h-screen flex flex-col`}
+          className={`max-lg:w-full flex-grow min-h-screen flex flex-col`}
         >
           <header className="sticky top-0 w-full px-6 py-4 bg-navbar-bg z-40">
             <Navbar

@@ -1,13 +1,21 @@
 import { games } from "@/constants";
-import React from "react";
+import Banner1 from "@/assets/imgs/banners/Banner1.png";
+import Banner3 from "@/assets/imgs/banners/Banner3.png";
 
 export default function Games() {
   return (
     <div className="p-6 space-y-6">
+      <div className="flex items-end gap-8">
+        <img src={Banner1} alt="img" className="max-lg:hidden w-auto h-[264px]" />
+        <img src={Banner3} alt="img" className="w-auto lg:h-[293px]" />
+      </div>
+
       <div className="space-y-6">
         <div className="flex items-center gap-6">
           <div className="w-full h-[1px] border border-border" />
-          <p className="whitespace-nowrap text-muted font-medium">Featured Games</p>
+          <p className="whitespace-nowrap text-muted font-medium">
+            Featured Games
+          </p>
           <div className="w-full h-[1px] border border-border" />
         </div>
 
