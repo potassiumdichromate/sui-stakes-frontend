@@ -1,4 +1,4 @@
 import Navbar from "./Navbar";
-import Sidebar from "./sidebar";
+import Sidebar from "./Sidebar";
 
 export { Sidebar, Navbar }
