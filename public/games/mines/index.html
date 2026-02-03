@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mines – Sui Stakes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: #0a0e27;
+      color: #fff;
+      font-family: 'Inter', -apple-system, sans-serif;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .game-board {
+      flex: 1;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tile {
+      aspect-ratio: 1;
+      background: linear-gradient(145deg, #1e2340, #151829);
+      border: 2px solid #2a3150;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      position: relative;
+    }
+
+    .tile:hover:not(.revealed):not(.disabled) {
+      transform: translateY(-2px);
+      border-color: #4a9eff;
+      background: linear-gradient(145deg, #2a3150, #1e2340);
+    }
+
+    .tile.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .tile.revealed.safe {
+      background: linear-gradient(145deg, #0f3a1f, #1a4d2e);
+      border-color: #22c55e;
+      cursor: default;
+    }
+
+    .tile.revealed.mine {
+      background: linear-gradient(145deg, #3a0f0f, #4d1a1a);
+      border-color: #ef4444;
+      cursor: default;
+    }
+
+    .tile img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: #1a1f3a;
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      color: #6b7280;
+      margin-bottom: 2px;
+    }
+
+    .stat-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stat-value.highlight {
+      color: #22c55e;
+      font-size: 16px;
+    }
+
+    .controls {
+      width: 280px;
+      background: #1a1f3a;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .balance-box {
+      background: #0f1428;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .balance-label {
+      font-size: 11px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .balance-value {
+      font-size: 20px;
+      font-weight: 800;
+      color: #4a9eff;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-label {
+      font-size: 12px;
+      color: #9ca3af;
+      font-weight: 600;
+    }
+
+    .input-field {
+      background: #0f1428;
+      border: 1px solid #2a3150;
+      border-radius: 6px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: #4a9eff;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 4px;
+      background: #2a3150;
+      border-radius: 2px;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: #4a9eff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .btn {
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+
+    .btn-primary {
+      background: #4a9eff;
+      color: #fff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #357abd;
+      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: #22c55e;
+      color: #fff;
+    }
+
+    .btn-success:hover:not(:disabled) {
+      background: #16a34a;
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1a1f3a;
+      border: 2px solid #4a9eff;
+      border-radius: 8px;
+      padding: 12px 20px;
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.3s;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .controls {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <!-- GAME BOARD -->
+    <div class="game-board">
+      <div class="grid" id="grid"></div>
+      
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Next Tile</div>
+          <div class="stat-value highlight" id="multView">1.00×</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Profit</div>
+          <div class="stat-value" id="profitView">0.0000 SUI</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Gems</div>
+          <div class="stat-value" id="revealedView">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+      <div class="balance-box">
+        <div class="balance-label">Balance</div>
+        <div class="balance-value" id="balance">0.0000</div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Bet Amount</label>
+        <input type="number" id="bet" class="input-field" value="0.01" min="0.01" step="0.01">
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Mines: <span id="mineCountView">3</span></label>
+        <input type="range" id="mineCount" min="1" max="24" value="3">
+      </div>
+
+      <button id="betBtn" class="btn btn-primary">Bet</button>
+      <button id="cashoutBtn" class="btn btn-success" style="display: none;" disabled>Cashout</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
