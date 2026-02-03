@@ -5,7 +5,7 @@
 let blockchainMode = (window.parent !== window);
 let platformBalance = 0;
 
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://sui-stakes-backend.onrender.com';
 
 // Symbol name mapping for backend
 const SYMBOL_MAP = {

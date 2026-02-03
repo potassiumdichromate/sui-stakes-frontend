@@ -6,7 +6,7 @@ let blockchainMode = (window.parent !== window);
 let platformBalance = 0;
 let currentSessionId = null;
 
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://sui-stakes-backend.onrender.com';
 
 if (blockchainMode) {
     console.log('🔗 Platform mode enabled for Crash');

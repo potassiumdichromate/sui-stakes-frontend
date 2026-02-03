@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useCurrentAccount } from '@mysten/dapp-kit';
 
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://sui-stakes-backend.onrender.com';
 
 export function MinesWrapper() {
   const account = useCurrentAccount();

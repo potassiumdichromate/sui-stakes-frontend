@@ -9,7 +9,7 @@ import { useCurrentAccount, useDisconnectWallet, useSuiClientQuery, useSuiClient
 import { TransactionBlock } from '@mysten/sui.js/transactions';
 import { ConnectButton } from '@mysten/dapp-kit';
 
-const API_URL = 'http://localhost:3001';
+const API_URL = 'https://sui-stakes-backend.onrender.com';
 const HOT_WALLET = '0xcf05bd6fe51848c4a45280ddcb0a9d5094dc67fd9536748c7d9a1184834becdb';
 
 const Navbar = () => {
